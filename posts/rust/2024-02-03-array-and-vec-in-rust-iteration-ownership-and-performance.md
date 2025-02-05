@@ -1,6 +1,7 @@
 When working with higher-level languages like Python, you rarely think about how data structures are stored in memory. However, in Rust, memory placement plays a crucial role, directly impacting performance and code behavior. Let's explore how arrays (array) and vectors (Vec) work, along with their key similarities and differences.
 
-1. Key Similarities and Differences and Memory Management
+1. Key Similarities and Differences and Memory Management.
+
 Array (Array)
 
 An array is a fixed-size container allocated on the stack. Its size is known at compile time, making it highly efficient to work with.
