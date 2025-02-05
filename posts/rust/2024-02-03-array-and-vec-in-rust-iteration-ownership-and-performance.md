@@ -25,6 +25,7 @@ In Rust, arrays are placed on the stack by default since their size is known at 
 Example of heap allocation for a large array:
 
 fn large_array() -> Box<[i32; 1_000_000]> 
+
 {
     Box::new([0; 1_000_000]) // This array will be allocated on the heap
 }
