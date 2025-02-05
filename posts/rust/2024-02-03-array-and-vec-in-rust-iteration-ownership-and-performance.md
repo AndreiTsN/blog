@@ -48,3 +48,6 @@ Differences:
 🔄 Heap allocation: Requires memory management.
 
 
+By understanding these differences, we can optimize Rust programs for better performance and memory efficiency! 🚀
+
+
