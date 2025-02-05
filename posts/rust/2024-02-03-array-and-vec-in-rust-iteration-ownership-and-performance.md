@@ -10,10 +10,12 @@ let a: [i32; 5] = [10, 20, 30, 40, 50];
 
 Similarities with Vec:
 ✅ Both store elements of the same type.
+
 ✅ Both support iteration using for.
 
 Differences:
 ❌ Fixed size: An array cannot be resized after creation.
+
 ⚡ Stack allocation: Access to elements is extremely fast.
 
 In Rust, arrays are placed on the stack by default since their size is known at compile time. However, if an array is too large, it can be allocated on the heap using wrappers like Box<[T; N]>. Without such wrappers, arrays remain on the stack.
@@ -32,10 +34,12 @@ let vec1: Vec<i32> = vec![1, 2, 3, 4, 5];
 
 Similarities with Array:
 ✅ Supports indexed access (vec[0]).
+
 ✅ Can be passed to functions that work with sequences.
 
 Differences:
 ✅ Dynamic size: Elements can be added or removed.
+
 🔄 Heap allocation: Requires memory management.
 
 
