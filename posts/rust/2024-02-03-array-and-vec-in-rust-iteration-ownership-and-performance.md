@@ -24,9 +24,11 @@ Differences:
 In Rust, arrays are placed on the stack by default since their size is known at compile time. However, if an array is too large, it can be allocated on the heap using wrappers like Box<[T; N]>. Without such wrappers, arrays remain on the stack.
 Example of heap allocation for a large array:
 
-fn large_array() -> Box<[i32; 1_000_000]> {
+fn large_array() -> Box<[i32; 1_000_000]> 
+{
     Box::new([0; 1_000_000]) // This array will be allocated on the heap
 }
+
 
 Vector (Vec)
 
