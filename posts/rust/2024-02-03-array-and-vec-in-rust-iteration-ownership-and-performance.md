@@ -198,12 +198,12 @@ Summary
 
 | Method                    | Ownership                     | Modification | Is the original array available? |
 | ------------------------- | ----------------------------- | ----------- | ------------------------------- |
-| `for i in arr`            | **Copies** (if `Copy`)        | ❌           | ✅                               |
-| `for i in arr` (`!Copy`)  | **Moves** elements            | ❌           | ❌                               |
-| `for i in &arr`           | **Reference (`&T`)**          | ❌           | ✅                               |
-| `for i in arr.iter()`     | **Reference (`&T`)**          | ❌           | ✅                               |
-| `for i in arr.into_iter()`| **Copies** (if `Copy`)        | ❌           | ✅                               |
-
+| `for i in arr`            | **Copies** (if `Copy`)        | ❌          | ✅                               |
+| `for i in arr` (`!Copy`)  | **Moves** elements            | ❌          | ❌                               |
+| `for i in &arr`           | **Reference (`&T`)**          | ❌          | ✅                               |
+| `for i in arr.iter()`     | **Reference (`&T`)**          | ❌          | ✅                               |
+| `for i in arr.into_iter()`| **Copies** (if `Copy`)        | ❌          | ✅                               |
+| for i in arr.iter_mut()	| **Reference** (&mut T)        | ✅	      | ✅                                |
 
 💡 What to choose?
 
