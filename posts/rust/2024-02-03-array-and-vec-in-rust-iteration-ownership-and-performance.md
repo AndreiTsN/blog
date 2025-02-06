@@ -53,10 +53,12 @@ Differences:
 
 By understanding these differences, we can optimize Rust programs for better performance and memory efficiency!
 
+2.1. Iterating over Arrays and Vectors
 
-2.1. Iterating over Arrays
+Next, let's consider an interesting aspect of iterating over these structures.
 
-Next, let's consider an interesting aspect of iterating over these structures. Let's start with an array.
+2.1. Let's start with Arrays.
+
 In Rust, there are several ways to iterate over arrays ([T; N]), each with its own characteristics.
 
 2.1.1 Iterating by Value (for i in arr)
