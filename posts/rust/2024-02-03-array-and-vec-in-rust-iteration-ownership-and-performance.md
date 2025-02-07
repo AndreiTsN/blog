@@ -210,4 +210,153 @@ Summary
     for i in arr — if T: Copy, as the array remains available.
     for i in &arr or .iter() — if T does not implement Copy, to avoid moving elements.
     .iter_mut() — if you need to modify elements.
+
+
+2.2. Iterating Over Vectors in Rust
+
+Rust provides several ways to iterate over a vector (`Vec<T>`), each with its own characteristics. In this article, we will cover:
+
+- Iterating by value
+- Iterating by reference
+- Using `.iter()`, `.iter_mut()`, and `.into_iter()`
+- The effect of implementing `Copy`
+- What happens to the vector after iteration
+
+## 2.2.1. Iterating by Value (`for i in vec`)
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
     
+    for i in vec {
+        println!("{}", i);
+    }
+    
+    // vec is no longer available
+    // println!("{:?}", vec); // Error!
+}
+```
+
+🔹 **How it works?**
+
+- Elements are **moved** from `vec` into the loop.
+- After iteration, the vector **is no longer available**.
+- If `T` implements `Copy`, elements are **copied** when passed into the loop, but `Vec<T>` is still consumed.
+
+✅ **Use `for i in vec` if you need to take ownership of the elements, as the vector will be unavailable afterward.**
+
+---
+
+## 2.2.2. Iterating by Reference (`for i in &vec`)
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+    
+    for i in &vec {
+        println!("{}", i);
+    }
+    
+    // The vector remains available
+    println!("{:?}", vec);
+}
+```
+
+🔹 **How it works?**
+
+- `&vec` is passed as a reference (`&[T]`), so elements are not moved.
+- The loop iterates **by reference (`&T`)**.
+- The original vector remains accessible after the loop.
+
+---
+
+## 2.2.3. Iterating with `.iter()`
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+    
+    for i in vec.iter() {
+        println!("{}", i);
+    }
+    
+    println!("{:?}", vec);
+}
+```
+
+🔹 **How it works?**
+
+- `.iter()` creates an **iterator over references (`&T`)**.
+- Commonly used in functional programming, e.g.:
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+    let sum: i32 = vec.iter().sum();
+    println!("Sum of elements: {}", sum);
+}
+```
+
+---
+
+## 2.2.4. Iterating with `.into_iter()`
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+    
+    for i in vec.into_iter() {
+        println!("{}", i);
+    }
+}
+```
+
+🔹 **How it works?**
+
+- `.into_iter()` **moves** elements out of the vector, just like `for i in vec`.
+- Since Rust 1.53+, `.into_iter()` for `Vec<T>` behaves the same as `for i in vec`, so `.iter()` or `.iter_mut()` is generally preferred.
+- After iteration, the vector is consumed and no longer available.
+
+✅ **In modern Rust, prefer using `.iter()` or `.iter_mut()` unless you need to move elements.**
+
+---
+
+## 2.2.5. Iterating with `.iter_mut()` (Modifying Elements)
+
+```rust
+fn main() {
+    let mut vec = vec![1, 2, 3, 4, 5];
+    
+    for i in vec.iter_mut() {
+        *i *= 2;
+    }
+    
+    println!("{:?}", vec);
+}
+```
+
+🔹 **How it works?**
+
+- `.iter_mut()` creates an **iterator over mutable references (`&mut T`)**.
+- Allows **modifying vector elements** inside the loop.
+- The original vector remains available after iteration.
+
+---
+
+## **Summary**
+
+| Method                     | Ownership                     | Mutation | Vector Available? |
+|----------------------------|------------------------------|----------|------------------|
+| `for i in vec`             | **Moves** elements           | ❌        | ❌               |
+| `for i in &vec`            | **Reference (`&T`)**         | ❌        | ✅               |
+| `for i in vec.iter()`      | **Reference (`&T`)**         | ❌        | ✅               |
+| `for i in vec.into_iter()` | **Moves** elements           | ❌        | ❌               |
+| `for i in vec.iter_mut()`  | **Mutable reference (`&mut T`)** | ✅        | ✅               |
+
+💡 **Which one to use?**
+
+- **`for i in vec`** — if you need to take ownership of elements.
+- **`for i in &vec` or `.iter()`** — if elements should remain available.
+- **`.iter_mut()`** — if elements need modification.
+- **`.into_iter()`** — rarely used, as it behaves like `for i in vec`.
+
